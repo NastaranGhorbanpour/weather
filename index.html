@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style/output.css">
+    <link rel="stylesheet" href="assets/font/css/fontello.css">
+    <style>
+        input {
+            text-transform: capitalize;
+        }
+    </style>
+
+</head>
+
+<body class="relative w-full h-[100vh]  bg-amber-900 bg-cover bg-center">
+    <section class="w-[35%] h-[50vh] mx-auto mt-[100px] backBler p-3">
+        <div class="w-full h-[15%] ">
+            <input class="w-[75%] outline-0 h-full text-xl text-[#828ECC] border-b-1 border-white" type="text"
+                placeholder="ENTER CITY, COUNTRY">
+            <button id="search" class="hover:bg-[#1A237E] w-[20%] h-full text-xl text-white ">search</button>
+        </div>
+
+        <h2 id="loc" class="w-full uppercase border-b-1 border-white text-white text-2xl mt-[30px]"></h2>
+
+        <section class="w-full  flex justify-between ">
+
+            <div class="max-w-[70%] flex *:text-white  justify-center">
+                <h1 id="temp" class="text-8xl my-10 w-full flex items-center"><img src="" alt="">
+                    <p></p> <a class=" text-4xl " href="">&deg;C</a>
+                </h1>
+            </div>
+
+
+            <div id="other" class="w-[40%] *:text-white pt-5 pr-5 *:text-xl *:text-right">
+                <h4></h4>
+                <h4></h4>
+                <h4 class="mt-6 "></h4>
+                <h4></h4>
+            </div>
+            <br>
+
+
+        </section>
+        <div id="moreInf"
+            class="w-full flex justify-between *:w-1/4 *:text-white *:text-xl p-5 *:capitalize text-center">
+            <h2></h2>
+            <h2 class="border-x-1 border-white "></h2>
+            <h2 class="border-r-1 border-white "></h2>
+            <h2></h2>
+        </div>
+    </section>
+
+    <figure class="group z-50 w-[150px] h-[150px] absolute bottom-[40px] left-[25px] ">
+
+
+        <img class="w-full h-full object-cover absolute top-0 left-0 firstAnime" src="assets/img/me.JPG" alt="">
+
+        <figcaption class="font-[caveat] absolute -bottom-[25px] left-0 text-[18px] text-[rgb(148, 87, 67)]">Nastaran Ghorbanpour</figcaption>
+
+        <a href="https://github.com/NastaranGhorbanpour" class="icon-github-circled decoration-0 w-[15px] h-[15px] absolute right-[40%] text-[20px] -z-10 duration-1000 text-[rgb(85, 57, 21)] hover:text-[rgb(148, 87, 67)] bottom-[20px] group-hover:-right-[20%] group-hover:z-50"></a>
+        <a href="https://www.linkedin.com/in/nastaran-ghorbanpour-027a7b349/" class="icon-linkedin decoration-0 w-[15px] h-[15px] absolute right-[40%] text-[20px] -z-10 duration-1000 text-[rgb(85, 57, 21)] hover:text-[rgb(148, 87, 67)] bottom-[70px] group-hover:-right-[20%] group-hover:z-50"></a>
+        <a href="https://www.instagram.com/nestacode.lab/" class="icon-instagram decoration-0 w-[15px] h-[15px] absolute right-[40%] text-[20px] -z-10 duration-1000 text-[rgb(85, 57, 21)] hover:text-[rgb(148, 87, 67)] bottom-[120px] group-hover:-right-[20%] group-hover:z-50"></a>
+    </figure>
+</body>
+<script>
+    const body = document.querySelector('body')
+    const search = document.getElementById('search')
+    const loc = document.getElementById('loc')
+    const temp = document.getElementById('temp')
+    const inf = document.getElementById('other')
+    const moreInf = document.getElementById('moreInf')
+    const apiKey = 'f3354a52f814922b1310d863cd61f835'
+    const photoApiKey = 'sPIakmB4dK5dnwYZ647plWfYqsl0a4WyFqar88QaPs8'
+    let city = ''
+    let iconCode = ''
+
+
+    city = 'MOUNTAIN VIEW'
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
+        .then(res => {
+            if (res.ok) return res.json()
+            throw new Error('err')
+        })
+        .then(data => {
+            fetch('https://api.unsplash.com/search/photos?query=' + city + '+&client_id=' + photoApiKey)
+                .then(res => {
+                    if (res.ok) return res.json()
+                    throw new Error('err')
+                })
+                .then(data => {
+                    let imgUrl = data.results[0].urls.full
+                    body.style.backgroundImage = "url('" + imgUrl + "')";
+                })
+                .catch((err) => console.log('err')
+                )
+            addInformation(data)
+        })
+        .catch((err) => console.log(err))
+
+
+    search.addEventListener('click', () => {
+
+        if (search.previousElementSibling.value != '') {
+            city = search.previousElementSibling.value
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
+                .then(res => {
+                    if (res.ok) return res.json()
+                    throw new Error('err')
+                })
+                .then(data => {
+                    search.addEventListener('click', () => {
+                        if (search.previousElementSibling != '') {
+                            city = search.previousElementSibling.value
+                            addInformation(data)
+                            fetch('https://api.unsplash.com/search/photos?query=' + city + '+&client_id=' + photoApiKey)
+                                .then(res => {
+                                    if (res.ok) return res.json()
+                                    throw new Error('err')
+                                })
+                                .then(data => {
+                                    let imgUrl = data.results[0].urls.full
+                                    body.style.backgroundImage = "url('" + imgUrl + "')";
+                                })
+                                .catch((err) => console.log('err')
+                                )
+                        } else {
+                            alert('search the city')
+                        }
+                    })
+
+                })
+                .catch((err) => console.log(err))
+
+        } else {
+            alert('enter the city!')
+        }
+    })
+
+
+    function weekDayAndTime() {
+        const now = new Date();
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        const dayName = days[now.getDay()];
+        const time = now.getHours() + ':' + now.getMinutes()
+        myDate = dayName + ' ' + time
+
+        return myDate
+    }
+
+    function addInformation(data) {
+        iconCode = data.weather[0].icon
+        loc.innerHTML = data.name + ', ' + data.sys.country
+        temp.children[0].setAttribute('src', 'https://openweathermap.org/img/wn/' + iconCode + '@2x.png')
+        temp.children[1].innerText = Math.floor(data.main.temp - 273)
+        inf.children[0].innerHTML = weekDayAndTime()
+        inf.children[1].innerHTML = data.weather[0].description
+        inf.children[2].innerHTML = 'Wind: ' + data.wind.speed + ' mph'
+        inf.children[3].innerHTML = 'Humidity: ' + data.main.humidity + '%'
+
+        moreInf.children[0].innerHTML = 'Feels like: ' + `<br>` + Math.floor(data.main.feels_like - 273) + ' &degC'
+        moreInf.children[1].innerHTML = 'min temp: ' + `<br>` + Math.floor(data.main.temp_min - 273) + ' &degC'
+        moreInf.children[2].innerHTML = 'max temp: ' + `<br>` + Math.floor(data.main.temp_max - 273) + ' &degC'
+        moreInf.children[3].innerHTML = 'pressure: ' + `<br>` + data.main.pressure + ' hPa'
+    }
+
+</script>
+
+</html>

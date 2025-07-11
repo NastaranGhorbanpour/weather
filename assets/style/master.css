@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@layer base{
+    h2,h3{
+        font-family: roberto-light;
+    }
+    h4{
+        font-family: roberto-thin;
+    }
+    h1,a{
+        font-family: inter-regular;
+    }
+}
+@layer components{
+    #search{
+        &:hover{
+            background-color: #1A237E;
+        }
+    }
+}
+@layer utilities{
+    .backBler{
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+@layer theme{
+    .firstAnime{
+        animation: bdr1 3s ease-out infinite alternate;
+    }
+    .secondAnime{
+        animation: bdr2 3s ease-out alternate infinite;
+    }
+}
+
+@keyframes bdr1{
+    0%{border-radius: 58% 34% 42% 37% / 52% 30% 68% 44%  ;}
+    50%{border-radius: 34% 54% 30% 59% / 75% 59% 36% 33% ;}
+    100%{border-radius: 61% 43% 75% 27% / 87% 33% 46% 20%  ;}
+}
+@keyframes bdr2{
+    0%{border-radius: 61% 43% 75% 27% / 87% 33% 46% 20%  ;}
+    50%{border-radius: 58% 34% 42% 37% / 52% 30% 68% 44%  ;}
+    100%{border-radius: 34% 54% 30% 59% / 75% 59% 36% 33%   ;}
+}
+@font-face {
+    font-family: caveat;
+    src: url(../font/Caveat-Bold.ttf);
+}
+
+@font-face {
+    font-family: roberto-thin;
+    src: url(../font/Roboto_SemiCondensed-Thin.ttf);
+}
+@font-face {
+    font-family: roberto-light;
+    src: url(../font/Roboto_SemiCondensed-ExtraLight.ttf);
+}
+@font-face {
+    font-family: inter-regular;
+    src: url(../font/Roboto_Condensed-Regular.ttf);
+}
