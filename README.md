@@ -1,8 +1,8 @@
 # Weather
 ## A simple weather that fetches real-time weather using a public API. 
-### Responsive
-### Search weather by city or country name
-### Real-time temperature, humidity, wind speed, etc.
+### - Responsive
+### - Search weather by city or country name
+### - Real-time temperature, humidity, wind speed, etc.
 
 <img width="2842" height="1360" alt="Image" src="https://github.com/user-attachments/assets/bba867b4-1f0a-4198-8caf-6b0c8159fa02" />
 
