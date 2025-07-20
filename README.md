@@ -10,8 +10,7 @@
 
 <img width="2836" height="1384" alt="Image" src="https://github.com/user-attachments/assets/f2cbc400-2382-48a5-9c89-0e6d54a6a2d6" />
 
-- Use VPN
-- [Demo Project]( https://nastaranghorbanpour.github.io/weather/)
+- [Demo Project]( https://nastaranghorbanpour.github.io/weather/)  (Use VPN)
 - Developed by Nastaran Ghorbanpour
 - Created - 2025-07-06
 - Technologies Used : Html , css , tailwind , javascript
